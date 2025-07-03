@@ -1,0 +1,22 @@
+[
+  {
+    "Emp#": null,
+    "Name": "Emp# 137",
+    "Hours": null,
+    "Rate": null,
+    "Current Pay": null,
+    "YTD Pay": null,
+    "Net Pay": null,
+    "Taxes": {
+      "FWT": null,
+      "SS W/H": null,
+      "MC W/H": null,
+      "NY State Tax": null,
+      "NY SDI": null
+    },
+    "ER Taxes": {
+      "ER SS": null,
+      "ER MC": null
+    }
+  }
+]
