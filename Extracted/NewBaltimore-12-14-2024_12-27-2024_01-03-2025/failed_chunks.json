@@ -1,0 +1,17 @@
+[
+  {
+    "Emp#": "47",
+    "error": "429 Client Error: Too Many Requests for url: https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyD20lmfz2erVA_JQas-vOuAmauKGqbcW3Q",
+    "raw_input": "Scott VanWormer\nDirDep\tNet Pay: 1,664.94\n\nRegular|9.00|27.33|245.97|245.97|FWT|161.86|161.86|457(b)|204.43|204.43|ER SS|145.82|145.82|\nOvertime|9.00|40.995|368.96|368.96|SS W/H|145.82|145.82|Aflac|23.54|23.54|ER MC|34.10|34.10|\nVacation|62.00|27.33|1,694.46|1,694.46|MC W/H|34.10|34.10|Aflac Pre-Tax|49.59|49.59||||\nPersonal|1.00|27.33|27.33|27.33|NY State Tax|85.56|85.56|Dental Ins|45.18|45.18||||\nHoliday|8.00|27.33|218.64|218.64|NY SDI|1.20|1.20|Medical Ins|108.64|108.64||||\n||||||||Union Dues|30.50|30.50||||\nEmployee Tot:|89.00||2,555.36|2,555.36||428.54|428.54||461.88|461.88||179.92|179.92|"
+  },
+  {
+    "Emp#": "4",
+    "error": "429 Client Error: Too Many Requests for url: https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyD20lmfz2erVA_JQas-vOuAmauKGqbcW3Q",
+    "raw_input": "Louis P Betke\nDirDep\tNet Pay: 821.76\n\nRegular\t35.00|25.49|892.15|892.15|FWT|85.74|85.74|||ER SS|63.22|63.22|\nHoliday\t5.00|25.49|127.45|127.45|SS W/H|63.22|63.22|||ER MC|14.78|14.78|\n||||MC W/H|14.78|14.78||||||\n||||NY State Tax|34.10|34.10||||||\nEmployee Tot:\t40.00||1,019.60|1,019.60||197.84|197.84|0.00|0.00||78.00|78.00|"
+  },
+  {
+    "Emp#": "107",
+    "error": "429 Client Error: Too Many Requests for url: https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyD20lmfz2erVA_JQas-vOuAmauKGqbcW3Q",
+    "raw_input": "David M Varade\nDirDep\tNet Pay: 43.86\n\nRegular\t2.50|22.00|55.00|55.00|FWT|0.00|0.00|414(h)|1.65|1.65|ER SS|3.41|3.41|\n||||SS W/H|3.41|3.41||||ER MC|0.80|0.80|\n||||MC W/H|0.80|0.80|||||||\n||||NY State Tax|5.00|5.00|||||||\n||||NY SDI|0.28|0.28|||||||\nEmployee Tot:\t2.50||55.00|55.00||9.49|9.49||1.65|1.65||4.21|4.21|"
+  }
+]

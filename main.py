@@ -6,9 +6,9 @@ from dotenv import load_dotenv
 
 # === Config ===
 REQUEST_DELAY_SECONDS = 7
-FAILED_LOG_PATH = "failed_chunks.json"
-SUCCESS_LOG_PATH = "all_extracted_employees.json"
-CHUNKS_FILE_PATH = "employee_chunks_raw.json"
+FAILED_LOG_PATH = "data/pdf_ones/failed_chunks_pdf.json"
+SUCCESS_LOG_PATH = "data/pdf_ones/all_extracted_employees_pdf.json"
+CHUNKS_FILE_PATH = "data/pdf_ones/employee_chunks_raw_pdf.json"
 
 # === Load employee chunks ===
 with open(CHUNKS_FILE_PATH, "r", encoding="utf-8") as f:
@@ -45,55 +45,73 @@ If a value is missing, set it to `null`. All keys must always be present.
 Include both **Current** and **YTD** values for all applicable fields.
 
 Also extract employee-level totals:
-- "Total Gross", "Total Deductions", "Total Taxes", and "Net Pay"
+- "Total Deductions", "Total Taxes", and "Net Pay"
+
+Earnings Field Format:
+- All earning types (e.g., Regular, Sick, Holiday, Personal, Vac, Comp, Jury, etc.) follow this format:
+  Hours | Rate | Current Amount | YTD Amount
+
+Parsing Guidelines:
+- If any value in this 4-part structure is missing, set it to null.
+  - Example: "Sick |||263.52" means:
+    "SickHrs": null, "SickAmt": null, "SickAmt_YTD": 263.52
+  - Example: "Holiday | 8.00 | 200.00 |" means:
+    "HolHrs": 8.0, "HolAmt": 200.0, "HolAmt_YTD": null
+- Field separators may include pipes (`|`), spaces, or tabs. Treat them all equivalently.
+- Do not guess values. Set missing values to `null`.
+
+Important Field Distinctions:
+- "Vision Ins" and "Vision Insurance" are two different fields. Do not combine them.
+- "Dental Ins" and "Dental Insurance" are also separate. Keep them distinct.
 
 Here is the required structure:
 
 {{
-  "Emp#": ...,
-  "Name": ...,
-  "Department": ...,
+  "Emp#": null,
+  "Name": null,
 
-  "RegHrs": ..., "RegAmt": ..., "RegAmt_YTD": ...,
-  "VacHrs": ..., "VacAmt": ..., "VacAmt_YTD": ...,
-  "HolHrs": ..., "HolAmt": ..., "HolAmt_YTD": ...,
-  "SickHrs": ..., "SickAmt": ..., "SickAmt_YTD": ...,
-  "OTHrs": ..., "OTAmt": ..., "OTAmt_YTD": ...,
-  "PersonalHrs": ..., "PersonalAmt": ..., "PersonalAmt_YTD": ...,
-  "Deputy Clerk Hrs": ..., "Deputy Clerk Amt": ..., "Deputy Clerk Amt_YTD": ...,
-  "OtherHrs": ..., "OtherAmt": ..., "OtherAmt_YTD": ...,
-  Emergency Mgmt Hrs: ..., "Emergency Mgmt Amt": ..., "Emergency Mgmt Amt_YTD": ...,
+  "RegHrs": null, "Rate":null,"RegAmt": null, "RegAmt_YTD": null,
+  "VacHrs": null, "VacAmt": null, "VacAmt_YTD": null,
+  "HolHrs": null, "HolAmt": null, "HolAmt_YTD": null,
+  "SickHrs": null, "SickAmt": null, "SickAmt_YTD": null,
+  "OTHrs": null, "OTAmt": null, "OTAmt_YTD": null,
+  "PersonalHrs": null, "PersonalAmt": null, "PersonalAmt_YTD": null,
 
-  "FWT": ..., "FWT_YTD": ...,
-  "SS W/H": ..., "SS W/H_YTD": ...,
-  "MC W/H": ..., "MC W/H_YTD": ...,
-  "SOCSEC": ..., "SOCSEC_YTD": ...,
-  "MEDI": ..., "MEDI_YTD": ...,
-  "NY State Tax": ..., "NY State Tax_YTD": ...,
-  "NY SDI": ..., "NY SDI_YTD": ...,
+  "Deputy Hrs": null, "Deputy Amt": null, "Deputy Amt_YTD": null,
+  "Recor Hrs": null, "Recor Amt": null, "Recor Amt_YTD": null,
+  "Comp Hrs": null, "Comp Amt": null, "Comp Amt_YTD": null,
+  "Clerk Hrs": null, "Clerk Amt": null, "Clerk Amt_YTD": null,
+  "Jury Hrs": null, "Jury Amt": null, "Jury Amt_YTD": null,
+  "BRV Hrs": null, "BRV Amt": null, "BRV Amt_YTD": null,
+  "OtherHrs": null, "OtherAmt": null, "OtherAmt_YTD": null,
+  "Emergency Mgmt Hrs": null, "Emergency Mgmt Amt": null, "Emergency Mgmt Amt_YTD": null,
 
-  "ER SS": ..., "ER SS_YTD": ...,
-  "ER MC": ..., "ER MC_YTD": ...,
+  "FWT": null, "FWT_YTD": null,
+  "SS W/H": null, "SS W/H_YTD": null,
+  "MC W/H": null, "MC W/H_YTD": null,
+  "NY State Tax": null, "NY State Tax_YTD": null,
+  "NY SDI": null, "NY SDI_YTD": null,
+  "NY PFML":null, "NY PFML_YTD":null,
 
-  "414(h)": ..., "414(h)_YTD": ...,
-  "457(b)": ..., "457(b)_YTD": ...,
-  "Aflac": ..., "Aflac_YTD": ...,
-  "Medical Ins": ..., "Medical Ins_YTD": ...,
-  "Dental Ins": ..., "Dental Ins_YTD": ...,
-  "Vision Ins": ..., "Vision Ins_YTD": ...,
-  "Aflac Pre-Tax": ..., "Aflac Pre-Tax_YTD": ...,
-  "Union Dues": ..., "Union Dues_YTD": ...,
-  "Pre Tax SCP": ..., "Pre Tax SCP_YTD": ...,
-"Loan Repayment": ..., "Loan Repayment_YTD": ...,
+  "ER SS": null, "ER SS_YTD": null,
+  "ER MC": null, "ER MC_YTD": null,
+  "FUTA":null,   "FUTA_YTD":null,
+  "NY SUTA":null, "NY SUTA_YTD":null,
 
-  "Total Hours": ...,
-  "Total Earnings YTD":...,
-  "Total Taxes Current": ...,
-  "Total Taxes YTD": ...,
-  Total Deductions YTD:...,
-  "Total ER Taxes Cuurrent": ...,
-  "Total ER Taxes YTD": ...,
-  "Net Pay": ...
+  "414(h)": null, "414(h)_YTD": null,
+  "457(b)": null, "457(b)_YTD": null,
+  "Aflac": null, "Aflac_YTD": null,
+  "Medical Ins": null, "Medical Ins_YTD": null,
+  "Dental Ins": null, "Dental Ins_YTD": null,
+  "Vision Ins": null, "Vision Ins_YTD": null,
+  "Dental Insurance": null, "Dental Insurance_YTD": null,
+  "Vision Insurance": null, "Vision Insurance_YTD": null,
+  "Aflac Pre-Tax": null, "Aflac Pre-Tax_YTD": null,
+  "Union Dues": null, "Union Dues_YTD": null,
+  "Pre Tax SCP": null, "Pre Tax SCP_YTD": null,
+  "Loan Repayment": null, "Loan Repayment_YTD": null,
+
+  "Net Pay": null
 }}
 
 Rules:

@@ -1,0 +1,22 @@
+[
+  {
+    "Emp#": "98",
+    "error": "503 Server Error: Service Unavailable for url: https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyD20lmfz2erVA_JQas-vOuAmauKGqbcW3Q",
+    "raw_input": "Kirk F Trombley\nChk# 12585\tNet Pay: 272.75\n\nRegular\t16.00|18.54|296.64|1,697.64|FWT|0.00|0.00|||ER SS|18.39|109.85|\nHoliday|||74.16|SS W/H|18.39|109.85|||ER MC|4.30|25.69|\n||||MC W/H|4.30|25.69||||||\n||||NY SDI|1.20|7.44||||||\nEmployee Tot:\t16.00||296.64|1,771.80||23.89|142.98|0.00|0.00||22.69|135.54|"
+  },
+  {
+    "Emp#": "126",
+    "error": "503 Server Error: Service Unavailable for url: https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyD20lmfz2erVA_JQas-vOuAmauKGqbcW3Q",
+    "raw_input": "Sandra L Trombley\nChk# 12586\tNet Pay: 606.44\n\nRegular\t17.50|18.54|324.45|1,780.74|FWT|0.00|31.54|||ER SS|41.79|265.49|\nDeputy Clerk 1410\t17.00|20.57|349.69|2,427.27|SS W/H|41.79|265.49|||ER MC|9.77|62.09|\nHoliday|||74.16|MC W/H|9.77|62.09||||||\n||||NY State Tax|14.94|115.68||||||\n||||NY SDI|1.20|7.12||||||\nEmployee Tot:\t34.50||674.14|4,282.17||67.70|481.92|0.00|0.00||51.56|327.58|"
+  },
+  {
+    "Emp#": "47",
+    "error": "503 Server Error: Service Unavailable for url: https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyD20lmfz2erVA_JQas-vOuAmauKGqbcW3Q",
+    "raw_input": "Scott VanWormer\nDirDep\tNet Pay: 1,449.71\n\nRegular|79.00|27.98|2,210.42|11,298.07|FWT|124.77|1,245.27|457(b)|179.07|1,506.34|ER SS|126.17|1,079.13|\nOvertime||||3,044.56|SS W/H|126.17|1,079.13|Aflac|23.54|164.78|ER MC|29.51|252.38|\nVacation||||2,198.10|MC W/H|29.51|252.38|Aflac Pre-Tax|49.59|347.13||||\nSick||||1,007.28|NY State Tax|69.52|646.55|Dental Ins|45.18|316.26||||\nPersonal||||363.09|NY SDI|1.20|8.40|Medical Ins|108.64|760.48||||\nHoliday||||890.16||||Union Dues|31.50|185.00||||\nOther|1.00|27.98|27.98|27.98||||||||||\nEmployee Tot:|80.00||2,238.40|18,829.24||351.17|3,231.73||437.52|3,279.99||155.68|1,331.51|"
+  },
+  {
+    "Emp#": "4",
+    "error": "503 Server Error: Service Unavailable for url: https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyD20lmfz2erVA_JQas-vOuAmauKGqbcW3Q",
+    "raw_input": "Louis P Betke\nDirDep\tNet Pay: 718.91\n\nRegular\t23.50|26.25|616.88|5,964.97|FWT|66.81|531.18|||ER SS|54.52|412.72|\nSick\t10.00|26.25|262.50|301.88|SS W/H|54.52|412.72|||ER MC|12.75|96.52|\nHoliday|||389.95|MC W/H|12.75|96.52||||||\n||||NY State Tax|26.39|213.38||||||\nEmployee Tot:\t33.50||879.38|6,656.80||160.47|1,253.80|0.00|0.00||67.27|509.24|"
+  }
+]
