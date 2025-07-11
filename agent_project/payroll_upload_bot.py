@@ -43,7 +43,7 @@ def run_upload_bot():
         page.wait_for_selector('input[name="Code"]', timeout=15000)
         print("✅ On 2FA input page")
 
-        totp = pyotp.TOTP("")
+        totp = pyotp.TOTP("VOQF25GTGDUFDDMG7WQEMOSRVTJHL6IY")
         code = totp.now()
         print("✅ Generated TOTP code:", code)
         page.fill('input[name="Code"]', code)

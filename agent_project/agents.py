@@ -5,17 +5,25 @@ import os
 import pyotp
 import re
 
-FILENAME = 'populated_output.csv'
-CLIENT = 'NewBaltimo'
-PAY_PERIOD = '06/02/2025 - 06/08/2025'
-PAY_DATE = '06/13/2025'
-FILE_PATH = f"{FILENAME}"
+#FILENAME = 'populated_output.csv'
+#CLIENT = 'NewBaltimo'
+#PAY_PERIOD = '06/02/2025 - 06/08/2025'
+#PAY_DATE = '06/13/2025'
+#FILE_PATH = f"{FILENAME}"
 
-
+FIRMCODE = "starb3966"
+USERNAME = "AryanJ"
+PASSWORD = "Drexel@1234"
 
 #USER_DATA_DIR = os.path.abspath("chrome_profile")
 
 def run_upload_bot():
+    FILENAME = os.environ["FILENAME"]
+    CLIENT = os.environ["CLIENT"]
+    PAY_PERIOD = os.environ["PAY_PERIOD"]
+    PAY_DATE = os.environ["PAY_DATE"]
+    FILE_PATH = os.environ["FILE_PATH"]
+    
     with sync_playwright() as p:
         browser = p.chromium.launch(
         channel="chrome",
@@ -62,7 +70,7 @@ def run_upload_bot():
         print("✅ On 2FA input page")
 
 # Generate and fill code
-        totp = pyotp.TOTP("secret")  # Replace with your actual secret
+        totp = pyotp.TOTP("VOQF25GTGDUFDDMG7WQEMOSRVTJHL6IY")  # Replace with your actual secret
         code = totp.now()
         print("✅ Generated TOTP code:", code)
         page.fill('input[name="Code"]', code)
@@ -148,17 +156,38 @@ def run_upload_bot():
 
         page.wait_for_timeout(2000)
         print("✅ File uploaded into modal:", FILE_PATH)
-        page.screenshot(path="after_upload_click.png")
-        page.pause()
-        page.screenshot(path="after_upload_click.png")
-        page.wait_for_timeout(2000)
-        print("📤 Clicked Upload button.")
 
-        # Step 8: Submit (adjust selector)
-        #page.click("button:has-text('Submit')")
-        
-        print("✅ Upload completed for:", CLIENT)
+        print("⏳ Waiting for file validation to complete...")
+        page.wait_for_selector("text=File: populated_output.csv", timeout=10000)
+
+        ok_button = page.locator('#uploadDialog button.btn.btn-primary:has-text("OK")')
+
+        # Wait for the button to become visible and enabled
+        ok_button.wait_for(state="visible", timeout=10000)
+        page.wait_for_function("btn => !btn.disabled", ok_button)
+
+        print("🖱️ Clicking OK in the upload modal now...")
+        ok_button.click()
+        page.wait_for_timeout(3000)
+
+
+        print("🖱️ Clicking OK in the upload modal now...")
+        print("⬇ Button HTML:", ok_button.inner_html())
+        print("⬇ Button is enabled:", ok_button.is_enabled())
+        print("⬇ Button is visible:", ok_button.is_visible())
+
+        ok_button.click()
+        page.wait_for_timeout(3000)
+
+
+        # Step 9: Click Review button on the main page
+        print("🖱️ Clicking Review button...")
+        page.click('button.btn.btn-primary:has-text("Review")')
+        print("✅ Review triggered. Waiting for 10 seconds...")
+        page.wait_for_timeout(10000)
         page.pause()
+
+        print("✅ Upload and Review completed for:", CLIENT)
 
         time.sleep(3)
         context.close()
