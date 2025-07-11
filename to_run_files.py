@@ -1,11 +1,12 @@
 import os
 import re
 from datetime import datetime
-from agent_project.agents import run_upload_bot  # 👈 Import your bot
+from agent_project.agents import run_upload_bot  # 👈 Your existing bot
 
-BASE_DIR = "Extracted"  # Adjusted relative path from agent_project
+BASE_DIR = "Extracted"
 CLIENT = "NewBaltimo"
 client_folder = "NewBaltimore"
+LOG_FILE = "failures.log"
 
 def convert_date_format(date_str):
     return datetime.strptime(date_str, "%m-%d-%Y").strftime("%m/%d/%Y")
@@ -38,19 +39,27 @@ def get_records_to_run():
         })
     return records
 
+def log_failure(record, error):
+    with open(LOG_FILE, "a") as f:
+        f.write(f"❌ Failed for {record['PAY_DATE']} ({record['PAY_PERIOD']}): {error}\n")
+
 if __name__ == "__main__":
     records = get_records_to_run()
 
-    for rec in records:
+    # Skip the first record (index 0)
+    records_to_run = records[1:]
+
+    for rec in records_to_run:
         print(f"\n▶️ Running upload for: {rec['PAY_PERIOD']} → {rec['PAY_DATE']}")
         try:
-            # 🔁 Dynamically assign values for the run
+            # Set environment variables for the bot
             os.environ["FILENAME"] = rec["FILENAME"]
             os.environ["CLIENT"] = rec["CLIENT"]
             os.environ["PAY_PERIOD"] = rec["PAY_PERIOD"]
             os.environ["PAY_DATE"] = rec["PAY_DATE"]
             os.environ["FILE_PATH"] = rec["FILE_PATH"]
 
-            run_upload_bot()  # Playwright bot will read from env vars
+            run_upload_bot()
         except Exception as e:
-            print(f"❌ Failed for {rec['PAY_DATE']}: {e}")
+            print(f"Failed for {rec['PAY_DATE']}: {e}")
+            log_failure(rec, str(e))

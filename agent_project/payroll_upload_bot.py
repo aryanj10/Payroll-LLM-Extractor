@@ -10,7 +10,12 @@ CLIENT = 'NewBaltimo'
 PAY_PERIOD = '07-07-2025 - 07-07-2025'
 PAY_DATE = '07-07-2025'
 
-
+from dotenv import load_dotenv
+load_dotenv()
+FIRMCODE = os.getenv("FIRMCODE")
+USERNAME = os.getenv("USERID")
+PASSWORD = os.getenv("PASSWORD")
+TOTP_SECRET = os.getenv("TOTP_SECRET")
 
 def run_upload_bot():
     with sync_playwright() as p:

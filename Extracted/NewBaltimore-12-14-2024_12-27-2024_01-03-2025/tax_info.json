@@ -1,0 +1,12 @@
+{
+  "Federal Withholding & FICA Tax": {
+    "Debit Date": "01/02/2025",
+    "Due Date": "01/08/2025",
+    "Amount": 5371.74
+  },
+  "NY Tax Withholding": {
+    "Debit Date": "01/02/2025",
+    "Due Date": "01/08/2025",
+    "Amount": 969.76
+  }
+}

@@ -1,7 +1,0 @@
-[
-  {
-    "Emp#": "98",
-    "error": "500 Server Error: Internal Server Error for url: https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyD20lmfz2erVA_JQas-vOuAmauKGqbcW3Q",
-    "raw_input": "Kirk F Trombley\nChk# 12569\tNet Pay: 272.75\n\nRegular\t16.00|18.54|296.64|1,030.20|FWT|0.00|0.00|||ER SS|18.39|68.47|\nHoliday|||74.16|SS W/H|18.39|68.47|||ER MC|4.30|16.01|\n||||MC W/H|4.30|16.01||||||\n||||NY SDI|1.20|4.67||||||\nEmployee Tot:\t16.00||296.64|1,104.36||23.89|89.15|0.00|0.00||22.69|84.48|"
-  }
-]

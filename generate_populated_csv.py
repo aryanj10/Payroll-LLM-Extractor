@@ -3,25 +3,33 @@ import json
 import os
 import re
 
+from datetime import datetime
+
 BASE_DIR = "Extracted"
 TEMPLATE_DIR = "Data/CSV_Templates"
+
 
 def extract_payroll_dates_from_folder(folder_name):
     match = re.match(r"(.+)-(\d{2}-\d{2}-\d{4})_(\d{2}-\d{2}-\d{4})_(\d{2}-\d{2}-\d{4})", folder_name)
     if not match:
         raise ValueError("❌ Folder name format must be: ClientName-MM-DD-YYYY_MM-DD-YYYY_MM-DD-YYYY")
-    
+
     client = match.group(1)
-    start = match.group(2).replace("-", "/")
-    end = match.group(3).replace("-", "/")
-    pay_date = match.group(4).replace("-", "/")
+    
+    def format_date(date_str):
+        dt = datetime.strptime(date_str, "%m-%d-%Y")
+        return f"{dt.month}/{dt.day}/{dt.year}"  # removes leading zeros
+
+    start = format_date(match.group(2))
+    end = format_date(match.group(3))
+    pay_date = format_date(match.group(4))
+
     return {
         "ClientName": client,
         "PayPeriod": f"{start} to {end}",
         "PayDate": pay_date,
         "PaySchedule": "Prior"
     }
-
 def find_matching_template(client_name):
     for f in os.listdir(TEMPLATE_DIR):
         if f.lower().startswith(client_name.lower()) and f.endswith(".csv"):
@@ -63,14 +71,14 @@ def populate_csv(folder_name):
 
     column_to_json_key = {
         "Emp Num": "Emp#",
-        "Employee Name": "Name",
+        #"Employee Name": "Name",
         "Regular Hours": "RegHrs",
         "Regular Amount": "RegAmt",
         "Vacation Hours": "VacHrs",
         "Vacation Amount": "VacAmt",
         "Holiday Hours": "HolHrs",
         "Holiday Amount": "HolAmt",
-        #"Reimbursement Amount": "ReimbAmt",
+        "Reimbursement Amount": "ReimbAmt",
         "Overtime Hours": "OTHrs",
         "Overtime Amount": "OTAmt",
         "Sick Hours": "SickHrs",
@@ -121,7 +129,12 @@ def populate_csv(folder_name):
                 if col_idx is not None and json_key in emp_json:
                     val = emp_json[json_key]
                     if val is not None:
-                        row[col_idx] = str(val)
+                        try:
+                            # Clean comma and convert to float
+                            cleaned_val = float(str(val).replace(",", "").strip())
+                            row[col_idx] = str(cleaned_val)
+                        except ValueError:
+                            row[col_idx] = str(val)
 
     # Save
     with open(output_csv, "w", newline='', encoding='utf-8') as f:
